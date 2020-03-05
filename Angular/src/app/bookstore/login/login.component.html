@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-dark text-white">
+            <a class="navbar-brand">
+                Book Store
+            </a>
+        </div>
+    </div>
+    <div class="text-center">
+        <h4>{{msg}}</h4>
+    </div>
+    <form #form2="ngForm" novalidate (ngSubmit)="submitLogin(form2)" class="m-2">
+        <div class="form-group">
+            <label>User Name</label>
+            <input class="form-control" #usernn="ngModel" [(ngModel)]="customer.username" name="usernn" required />
+            <span *ngIf="usernn.touched && usernn.invalid" class="text-danger">Please enter your Username</span>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" minlength="6" class="form-control" #passwordd="ngModel" [(ngModel)]="customer.password" name="password" required />
+            <span *ngIf="(passwordd.touched && passwordd.invalid)"class="text-danger">Please enter your Password</span>
+            <div *ngIf="passwordd.errors?.minlength" class="text-danger">Please enter your Password with minimum 7 characters</div>
+        </div>
+<!-- 
+        <div class="custom-control custom-radio">
+        <input id="admin" type="radio"  value="admin" name="role" [(ngModel)]="customer.actor" required/>
+        <label>Admin</label>
+        </div> -->
+
+        <!-- <div class="custom-control custom-radio">
+        <input id="customer" type="radio" value="customer" name="role" [(ngModel)]="customer.actor" required/>
+        <label>Customer</label>
+        </div>
+
+        <div class="custom-control custom-radio">
+            <input id="customer" type="radio" value="member" name="role" [(ngModel)]="customer.actor" required/>
+            <label style="color: darkorange;">Member</label>
+            </div> -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary m-1" [disabled]="!form2.dirty">Log In</button>
+            <button class="btn btn-secondary m-1" routerLink="/home">Cancel</button>
+        </div>
+
+    </form>
+
+</div>

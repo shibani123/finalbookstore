@@ -1,0 +1,88 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-dark text-white">
+            <a class="navbar-brand">
+                Book Store Cart Section
+            </a>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mt-2">
+            <h2 class="text-center">
+                Your Cart
+            </h2>
+            <table class="table table-bordered table-striped p-2">
+                <thead>
+                    <tr>
+                        <th>Quantity</th>
+                        <th>Book Name</th>
+                        <th class="text-right">Price</th>
+                        <th class="text-center">Subtotal</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="cart.lines.length == 0">
+                        <td colspan="4" class="text-center">
+                            Your cart is empty
+                        </td>
+                    </tr>
+                    <tr *ngFor="let line of cart.lines">
+                        <td>
+                            <input type="number" class="form-control-sm" min=1 style="width: 5em;"
+                                [value]="line.quantity"
+                                (change)="cart.updateQuantity(line.book, $event.target.value)" />
+                        </td>
+                        <td>{{line.book.booktitle}}</td>
+                        <td class="text-right">{{line.book.bookprice|currency:"INR"}}</td>
+                        <td class="text-center">{{line.lineTotal|currency:"INR"}}<button
+                                class="btn btn-sm btn-danger float-right"
+                                (click)="cart.removeLine(line.book.bookid)">Remove
+                            </button></td>
+
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right">Total: </td>
+                        <td class="text-center"><b>{{cart.cartPrice|currency:"INR"}}</b></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="text-center">
+                <div *ngIf="checkActor()" class="form-group">
+                    <label>Promocode :</label>
+                    <input class="form-control" #promocodee="ngModel" name="promocode" [(ngModel)]="promocode" [disabled]="varbool" required />
+                    <div *ngIf="promocodee.touched && promocodee.invalid" class="text-danger">
+                        Please enter a valid promocode
+                    </div>
+                    <div class="text-left" style="color: forestgreen;">{{msgg}}{{msggg | currency:"INR"}}{{msggga}}<del>{{msgggg | currency:"INR"}}</del></div>
+                    <br>
+                    <button class="btn bg-info" (click)=checkPromo() [disabled]="!promocodee.dirty||boolla">Add a PromoCode</button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Promocode</th>
+                                <th>Discount</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <tr *ngFor="let l of Promotions">
+                                <td>{{l.code}}</td>
+                                <td>{{l.discount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-primary m-1" routerLink="/customer-index">Continue Shopping</button>
+                <button class="btn btn-secondary m-1 bg-success" (click)="checkit()">Check Out</button>
+            </div>
+        </div>
+    </div>
+</div>

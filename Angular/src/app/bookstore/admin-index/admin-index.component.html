@@ -1,0 +1,89 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-dark text-white">
+            <a class="navbar-brand">
+                Book Store (Admin Interface)
+            </a>
+        </div>
+        <button class="btn btn-primary" (click)="logout()">LogOut</button>
+    </div>
+    <h2>Welcome! {{currentUser| uppercase}}</h2>
+    <h3>{{message}}</h3>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary m-1" (click)="addbookss()">Add Book</button>
+        <button class="btn btn-secondary m-1" (click)="editbookss()">Edit Book</button>
+        <button class="btn btn-primary m-2" (click)="addpromocode()">Add Promocode</button>
+    </div>
+    <div class="text-center" *ngIf="promocodeactive">
+        Add Promocode
+        <form #form3="ngForm" novalidate (ngSubmit)="submitAddpromo(form3)" class="m-2">
+            <div class="form-group">
+                <label>Promocode</label>
+                <input class="form-control" #promocodee="ngModel" [(ngModel)]="promo.code" name="promocodee" required />
+                <span *ngIf="promocodee.touched && promocodee.invalid" class="text-danger">Please enter a Promo Code</span>
+            </div>
+            <div class="form-group">
+                <label>Percentage discount (%)</label>
+                <input type="number" min="10" max="60" class="form-control" #perr="ngModel" [(ngModel)]="promo.discount" name="perr" required />
+                <span *ngIf="perr.touched && perr.invalid" class="text-danger">Please enter a percentage for Discount</span>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success m-1" [disabled]="!form3.dirty">Add Promocode</button>
+            </div>
+
+        </form>
+
+    </div>
+    <div class="text-center" *ngIf="editbookactive">
+        Edit a Book
+        <form #form4="ngForm" novalidate (ngSubmit)="submitEditBook(form4)" class="m-2">
+            <div class="form-group">
+                <label>Enter Book ID (to be editted)</label>
+                <input class="form-control" #bookeidd="ngModel" [(ngModel)]="bookeid" name="bookeidd" required />
+                <span *ngIf="bookeidd.touched && bookeidd.invalid" class="text-danger">Please enter a Promo Code</span>
+            </div>
+            <div class="form-group">
+                <label>New Quantity</label>
+                <input type="number" class="form-control" #newbookquantityy="ngModel" [(ngModel)]="newbookquantity" name="newbookquantityy" required />
+                <span *ngIf="newbookquantityy.touched && newbookquantityy.invalid" class="text-danger">Specify new Quantity</span>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success m-1" [disabled]="!form4.dirty">Edit Quantity</button>
+            </div>
+
+        </form>
+    </div>
+    <div class="text-center" *ngIf="addbookactive">
+        Add Book in Inventory
+        <form #form5="ngForm" novalidate (ngSubmit)="submitAddbook(form5)" class="m-2">
+            <div class="form-group">
+                <label class="text-left">New Book name:</label>
+                <input class="form-control" #newbooknamee="ngModel" [(ngModel)]="book.booktitle" name="newbooknamee" required />
+                <span *ngIf="newbooknamee.touched && newbooknamee.invalid" class="text-danger">Please enter Book Name</span>
+            </div>
+            <div class="form-group">
+                <label class="text-left">New Book Author:</label>
+                <input class="form-control" #newbookauthorr="ngModel" [(ngModel)]="book.bookauthor" name="newbookauthorr" required />
+                <span *ngIf="newbookauthorr.touched && newbookauthorr.invalid" class="text-danger">Please enter the Book Author</span>
+            </div>
+            <div class="form-group">
+                <label class="text-left">New Book price:</label>
+                <input class="form-control" #newbookpricee="ngModel" [(ngModel)]="book.bookprice" name="newbookpricee" required />
+                <span *ngIf="newbookpricee.touched && newbookpricee.invalid" class="text-danger">Please enter the Price</span>
+            </div>
+            <div class="form-group">
+                <label class="text-left">New Book quantity:</label>
+                <input class="form-control" #addnewbookquantityy="ngModel" [(ngModel)]="book.bookquantity" name="addnewbookquantityy" required />
+                <span *ngIf="addnewbookquantityy.touched && addnewbookquantityy.invalid" class="text-danger">Please enter Book Quantity</span>
+            </div>
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-success m-1" [disabled]="!form5.dirty">Add book</button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+</div>

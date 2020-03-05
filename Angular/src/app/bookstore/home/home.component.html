@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-dark text-white">
+            <a class="navbar-brand">
+                Book Store Home Page (Default UI)
+            </a>
+        </div>
+    </div>
+    <div class="text-center">
+        
+        <button class="btn btn-success m-2" routerLink="/login">Go to LogIn</button>
+        <button class="btn btn-primary m-2" routerLink="/signin">Go to Sign-In</button>
+        
+    </div>
+
+    <div class="row">
+        
+        <div class="col-9 p-2 text-black">
+            <div *ngFor="let book of Books" class="card m-3 p-1 bg-light text-black">
+                <h4>
+                    {{book.booktitle}}<span class="badge badge-pill bg-info float-right badge-primary">
+
+                        {{book.bookprice | currency:"INR"}}</span>
+
+                </h4>
+                <div class="card-text bg-white">By: {{book.bookauthor}}
+                    <button *ngIf="book.bookquantity>2" class="btn bg-success float-right btn-sm" (click)="Go()">
+                        LogIn To Purchase Books
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
