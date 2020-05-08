@@ -17,8 +17,8 @@ export class RestDataSource{
     baseUrl: string;
 
     constructor(private http: HttpClient){
-        //this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
-        this.baseUrl = `${PROTOCOL}://10.61.182.160:${PORT}/`;
+        this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
+        //this.baseUrl = `${PROTOCOL}://10.61.182.160:${PORT}/`;
     }
 
     getBooks() : Observable<Book[]>{
@@ -35,7 +35,7 @@ export class RestDataSource{
     }
 
     getCustomers() : Observable<Customer[]>{
-        return this.http.get<Customer[]>(this.baseUrl + "api/customers/a");
+        return this.http.get<Customer[]>(this.baseUrl + "api/customers/all");
     }
 
     saveBooks(book : Book) : Observable<Book>{

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderRepository } from '../model/order.repository';
-import { Order } from '../model/order.model';
-import { Cart } from '../model/cart.model';
+import { OrderRepository } from 'src/app/model/order.repository';
+import { Order } from 'src/app/model/order.model';
+import { Cart } from 'src/app/model/cart.model';
 import { NgForm } from '@angular/forms';
-import { BookRepository } from '../model/book.repository';
-import { Book } from '../model/book.model';
+import { BookRepository } from 'src/app/model/book.repository';
+import { Book } from 'src/app/model/book.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -33,6 +33,7 @@ export class CheckoutComponent implements OnInit {
         this.order.clear();
         this.submitted=false;
         this.orderSent=true;
+        this.order.shipped=true;
         //console.log(this.orderSent+"---------------");
       });
       this.cart.lines.forEach(p=>{

@@ -19,7 +19,7 @@
 
                     <tr *ngFor="let line of cart.lines">
                         
-                        <td>{{line.book.name}}</td>
+                        <td>{{line.bookname}}</td>
                         <td>{{line.quantity}}</td>
                         <td class="text-center">{{line.lineTotal|currency:"INR"}}</td>
                         
@@ -29,7 +29,7 @@
             <p>We will ship your goods ASAP!</p>
 
 
-            <button class="btn btn-primary" (click)="cart.clear()" routerLink="/acistore">
+            <button class="btn btn-primary" (click)="cart.clear()" routerLink="/customer-index">
                 Return to Shopping
             </button>
         </div>
@@ -85,7 +85,7 @@
             
             <div class="text-center">
             <button class="btn btn-primary m-1" routerLink="/checkout">Complete Order</button>
-            <button class="btn btn-secondary m-1" routerLink="/customer-index">Cancle</button>
+            <button class="btn btn-secondary m-1" (click) = "modifyPromo()" routerLink="/customer-index">Cancel</button>
             </div>
         </form>
 </div>

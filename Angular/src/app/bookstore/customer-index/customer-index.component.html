@@ -22,7 +22,7 @@
 
                 </h4>
                 <div class="card-text bg-white">By: {{book.bookauthor}}
-                    <button *ngIf="book.bookquantity>2" class="btn bg-success float-right btn-sm" (click)="addProductToCart(book)">
+                    <button id={{book}} *ngIf="book.bookquantity>2" [disabled] = "checkButton(book)" (click)="addProductToCart(book)" class="btn bg-success float-right btn-sm"  >
                         Add to Cart
                     </button>
                     <button *ngIf="lessthan(book.bookquantity)" class="btn btn-danger float-right" [disabled]="1">

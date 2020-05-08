@@ -10,9 +10,9 @@ import { LoginComponent } from './login/login.component';
 import { AdminIndexComponent } from './admin-index/admin-index.component';
 import { CustomerIndexComponent } from './customer-index/customer-index.component';
 import { HomeComponent } from './home/home.component';
-import { CartSummaryComponent } from '../cart-summary/cart-summary.component';
-import { CartDetailsComponent } from '../cart-details/cart-details.component';
-import { CheckoutComponent } from '../checkout/checkout.component';
+import { CartSummaryComponent } from './cart-summary/cart-summary.component';
+import { CartDetailsComponent } from './cart-details/cart-details.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { CheckoutComponent } from '../checkout/checkout.component';
     CheckoutComponent
   ],
   imports: [
-    CommonModule,ModelModule,RouterModule,FormsModule,
+    CommonModule,ModelModule,RouterModule,FormsModule
   ],
   exports:[SigninComponent,
     LoginComponent,

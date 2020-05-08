@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Cart } from '../model/cart.model';
-import { PromotionRepository } from '../model/promotion.repository';
+import { Cart } from 'src/app/model/cart.model';
+import { PromotionRepository } from 'src/app/model/promotion.repository';
 import { Router } from '@angular/router';
-import { Book } from '../model/book.model';
-import { BookRepository } from '../model/book.repository';
-import { Promotion } from '../model/promotion.model';
+import { Book } from 'src/app/model/book.model';
+import { BookRepository } from 'src/app/model/book.repository';
+import { Promotion } from 'src/app/model/promotion.model';
 
 @Component({
   selector: 'app-cart-details',
@@ -13,6 +13,7 @@ import { Promotion } from '../model/promotion.model';
 })
 export class CartDetailsComponent implements OnInit {
   promocode:string=null;
+  varbool:boolean=false
   boolla:boolean=false;
   totalprice:number;
   discount:number=0;
@@ -22,8 +23,11 @@ export class CartDetailsComponent implements OnInit {
   msgggg:number;
   diff:number=0;
   newprice:number;
+  mrp:number;
+  //public newcode:string = null;
+  //sahidala:boolean=false;
+  galat:boolean=false;
   constructor(public cart:Cart,public repo:PromotionRepository,public router:Router,public book:Book,public bookrepo:BookRepository) { this.totalprice=this.cart.cartPrice;}
-  
   checkPromo(){
     if(this.repo.getPromotion(this.promocode)!=null||this.repo.getPromotion(this.promocode)!=undefined){
       this.discount=parseInt(this.repo.getPromotion(this.promocode).discount);
@@ -37,8 +41,12 @@ export class CartDetailsComponent implements OnInit {
       this.cart.cartPrice=this.newprice;
       this.boolla=true;
       this.varbool=true;
+      this.galat=false;
     }
     else{
+      this.varbool=false;
+      this.galat=true;
+      
       alert("Enter a valid Promotion code!");
     }
     //if code present in promocode checkcode()
@@ -46,23 +54,39 @@ export class CartDetailsComponent implements OnInit {
     //totalprice=totalprice*(x/100);
     //this.cart.cartPrice=totalprice;
   }
-  checkActor(){
+checkActor(){
     if(sessionStorage.getItem("actor")==="member"){
       return true;
     }
     return false;
   } 
-  varbool:boolean=false;
+  modifyPromo(){
+    console.log("l:");
+    this.cart.cartPrice=this.mrp;
+    this.promocode=null;
+    this.boolla=false;
+    this.varbool=false;
+    this.galat=false;
+  }
+  
   get Promotions(): Promotion[]{
     return this.repo.getallPromotion();
   }
+  checkQuantityinCart():boolean{
+    if(this.cart.lines.length>=1){
+      return true;
+    }
+    return false;
+  }
   flag:boolean=true;
+  fixq:number;
   checkit(){
     this.cart.lines.forEach(e => {
       this.book = this.bookrepo.getBookById(e.book.bookid);
       if(this.book.bookquantity<e.quantity){
         this.flag=false;
-        alert("Ordered Quantity is Unavailable for-->"+this.book.booktitle);
+        alert("Ordered Quantity is Unavailable for-->"+this.book.booktitle );
+        this.fixq=this.book.bookquantity;
       }
     });
     if(this.flag==true){
@@ -70,9 +94,16 @@ export class CartDetailsComponent implements OnInit {
     }
     
   }
+  /*changePromocode(newpromocode: string){
+    this.newcode=newpromocode;
+
+  }*/
+
+  
 ngOnInit() {
     console.log(sessionStorage.getItem("actor"));
     console.log(this.cart);
+    this.mrp=this.cart.cartPrice;
   }
 
 }

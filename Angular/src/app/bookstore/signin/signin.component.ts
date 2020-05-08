@@ -28,7 +28,8 @@ export class SigninComponent implements OnInit{
         this.customerRepository.saveCustomer(this.customer).subscribe(cust => {
           this.submitted=false
         });
-        this.router.navigate(['/login']);
+        window.location.href='/login';
+        //this.router.navigate(['/login']);
         //this.customerRepository.getCustomer();
     }
   }
